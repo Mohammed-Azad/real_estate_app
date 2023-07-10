@@ -5,7 +5,7 @@ class textFields extends StatelessWidget {
   final bool pass;
   final bool focus;
   final TextInputType keyboardtype;
-  const textFields(this.namelabel, this.pass, this.focus,this.keyboardtype);
+  const textFields(this.namelabel, this.pass, this.focus,this.keyboardtype, {super.key});
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -17,7 +17,7 @@ class textFields extends StatelessWidget {
         labelText: namelabel,
         labelStyle: TextStyle(
             color: Theme.of(context).hintColor, fontWeight: FontWeight.w500),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide:
               BorderSide(color: Color.fromARGB(199, 160, 130, 241), width: 2),
         ),

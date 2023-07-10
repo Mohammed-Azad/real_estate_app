@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:onboarding/onboarding.dart';
+import 'package:sizer/sizer.dart';
 import 'login.dart';
 
 void main() {
@@ -26,51 +27,55 @@ class _OnboardScreenState extends State<OnboardScreen> {
             color: Colors.white,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 60.0,
-              ),
-              child: Image.asset(
-                'assets/images/home1.png',
-                width: double.infinity,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Real estate App',
-                  style: TextStyle(
-                      color: Color.fromRGBO(108, 7, 162, 0.51),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
-                  textAlign: TextAlign.left,
+        child: SizedBox(
+          height: 100.h,
+          width: 100.w,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 60.0,
+                ),
+                child: Image.asset(
+                  'assets/images/home1.png',
+                  width: double.infinity,
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Welcome to real estate app ! \n get your home easily ',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 18,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 45.0),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    'Real estate App',
+                    style: TextStyle(
+                        color: Color.fromRGBO(108, 7, 162, 0.51),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
               ),
-            ),
-            const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10))
-          ],
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Welcome to real estate app ! \n get your home easily ',
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ),
+              const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10))
+            ],
+          ),
         ),
       ),
     ),
@@ -83,56 +88,60 @@ class _OnboardScreenState extends State<OnboardScreen> {
             color: Colors.white,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 45.0,
-              ),
-              child: Image.asset(
-                'assets/images/home2.png',
-                width: double.infinity,
-              ),
-            ),
-            const SizedBox(
-              height: 80,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'User Friendly',
-                  style: TextStyle(
-                      color: Color.fromRGBO(108, 7, 162, 0.51),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
-                  textAlign: TextAlign.left,
+        child: SizedBox(
+          height: 100.h,
+          width: 100.w,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 45.0,
+                ),
+                child: Image.asset(
+                  'assets/images/home2.png',
+                  width: double.infinity,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'In this app you can easily get  home you can see homes such as a house villas  Towers and so on you can easily detect it on the map it’s user friendly',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 18,
+              const SizedBox(
+                height: 80,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 45.0),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    'User Friendly',
+                    style: TextStyle(
+                        color: Color.fromRGBO(108, 7, 162, 0.51),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
               ),
-            ),
-            const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10))
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'In this app you can easily get  home you can see homes such as a house villas  Towers and so on you can easily detect it on the map it’s user friendly',
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ),
+              const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10))
+            ],
+          ),
         ),
       ),
     ),
@@ -145,56 +154,60 @@ class _OnboardScreenState extends State<OnboardScreen> {
             color: Colors.white,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 60.0,
-              ),
-              child: Image.asset(
-                'assets/images/home3.png',
-                width: double.infinity,
-              ),
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45.0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Get your Dream',
-                  style: TextStyle(
-                      color: Color.fromRGBO(108, 7, 162, 0.51),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
-                  textAlign: TextAlign.left,
+        child: SizedBox(
+          height: 100.h,
+          width: 100.w,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 60.0,
+                ),
+                child: Image.asset(
+                  'assets/images/home3.png',
+                  width: double.infinity,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'This app offer you to get your  dreams in easier way, mor than  +10,000 homes are available ',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 18,
+              const SizedBox(
+                height: 100,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 45.0),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    'Get your Dream',
+                    style: TextStyle(
+                        color: Color.fromRGBO(108, 7, 162, 0.51),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
               ),
-            ),
-            const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10))
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'This app offer you to get your  dreams in easier way, mor than  +10,000 homes are available ',
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ),
+              const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 10))
+            ],
+          ),
         ),
       ),
     ),
@@ -210,7 +223,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
   Material _skipButton({void Function(int)? setIndex}) {
     return Material(
       borderRadius: defaultSkipButtonBorderRadius,
-      color: Color.fromRGBO(108, 7, 162, 0.51),
+      color: const Color.fromRGBO(108, 7, 162, 0.51),
       child: InkWell(
         borderRadius: defaultSkipButtonBorderRadius,
         onTap: () {
@@ -239,7 +252,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Login()),
+            MaterialPageRoute(builder: (context) => const Login()),
           );
         },
         child: const Padding(
@@ -291,7 +304,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                         indicator: Indicator(
                           closedIndicator: ClosedIndicator(
                               color: Colors.purple.shade200, borderWidth: 2),
-                          activeIndicator: ActiveIndicator(
+                          activeIndicator: const ActiveIndicator(
                               color: Colors.black54, borderWidth: 2),
                           indicatorDesign: IndicatorDesign.line(
                             lineDesign: LineDesign(

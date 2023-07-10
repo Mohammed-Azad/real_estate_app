@@ -1,125 +1,134 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/widgets/TextFields.dart';
+import 'package:sizer/sizer.dart';
 import 'login.dart';
 
 class Signup extends StatelessWidget {
-  const Signup({super.key});
+   const Signup({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SingleChildScrollView(
-        reverse: MediaQuery.of(context).viewInsets.bottom < 1 ? true : false,
-        child: Column(
-          children: <Widget>[
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: double.infinity,
-              height: 180,
-              child: Image.asset(
-                'assets/images/signup.png',
-                width: double.infinity,
+      body: SizedBox(
+        width: 100.w,
+        height: 100.h,
+        child: SingleChildScrollView(
+          reverse: MediaQuery.of(context).viewInsets.bottom < 1 ? true : false,
+          child: Column(
+            children: <Widget>[
+               SizedBox(
+                height: 2.h,
               ),
-            ),
-            const Padding(
-                padding:  EdgeInsets.only(left: 10),
-                child: Text(
-                  "Create New Account",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                      color: Color(0xff8F74D7)),
-                )),
-            const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30,vertical: 15),
-                //textFields(name,password or not , foucasable,keyboardtype)
-                child: textFields("Email", false, false,TextInputType.emailAddress)),
-            const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 30,
-                ),
-                child: textFields("Password", true, false,TextInputType.text)),
-            const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 30,vertical: 15
-                ),
-                child: textFields("Confirm Password", true, false,TextInputType.text)),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  fixedSize:Size(300, 50) ,
-                  foregroundColor: Colors.white,
-                  backgroundColor: Theme.of(context).secondaryHeaderColor,
-                  padding: EdgeInsets.all(10),
-                  
-                ),
-                onPressed: () {},
-                child: Text(
-                  'SignUp',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              SizedBox(
+                width: 100.w,
+                height: 200,
+                child: Image.asset(
+                  'assets/images/signup.png',
+                  width: double.infinity,
                 ),
               ),
-            ),  
-            Padding(padding: EdgeInsets.only(top: 15),
+               Padding(
+                  padding:  EdgeInsets.only(left: 1.w),
+                  child: const Text(
+                    "Create New Account",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Color(0xff8F74D7)),
+                  )),
+               Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 2.h),
+                  child: Column(
+                    children: [
+                      const textFields("Email", false, false,TextInputType.emailAddress),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                   const textFields("Password", true, false,TextInputType.text),
+                   SizedBox(
+                        height: 2.h,
+                      ),
+                   const textFields("Confirm Password", true, false,TextInputType.text),
+                    ],
+                  ),
+                  //textFields(name,password or not , foucasable,keyboardtype)
+                   
+               ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 1.h),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    fixedSize:const Size(300, 50) ,
+                    foregroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).secondaryHeaderColor,
+                    padding: const EdgeInsets.all(10),
+                    
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    'SignUp',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                ),
+              ),  
+              Padding(padding: EdgeInsets.only(top: 2.h),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:  [
+                    Expanded(
+                      child: Divider(
+                        indent: 20.0,
+                        endIndent: 10.0,
+                        thickness: 1,
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                    Text(
+                      "Or Sign Up with",
+                      style: TextStyle(color: Colors.deepPurple),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        indent: 10.0,
+                        endIndent: 20.0,
+                        thickness: 1,
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+               Padding(padding:EdgeInsets.only(left: 2.w,top: 2.h) ,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Expanded(
-                    child: Divider(
-                      indent: 20.0,
-                      endIndent: 10.0,
-                      thickness: 1,
-                      color: Colors.deepPurple,
-                    ),
+                children: [
+                  const CircleAvatar(backgroundImage: AssetImage('assets/images/google_logo.png'),radius:19,backgroundColor: Colors.transparent,),
+                  SizedBox(
+                    width: 5.w,
                   ),
-                  Text(
-                    "Or Sign Up with",
-                    style: TextStyle(color: Colors.deepPurple),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      indent: 10.0,
-                      endIndent: 20.0,
-                      thickness: 1,
-                      color: Colors.deepPurple,
-                    ),
-                  ),
+                  const CircleAvatar(backgroundImage: AssetImage('assets/images/facebook_logo.png'),radius: 20,),
                 ],
               ),
-            ),
-            const Padding(padding:EdgeInsets.only(left: 2,top: 15) ,
-            child: Row(
+              ),
+            Padding(padding:EdgeInsets.symmetric(horizontal: 1.w,vertical: 2.h),child:Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(backgroundImage: AssetImage('assets/images/google_logo.png'),radius:19,backgroundColor: Colors.transparent,),
-                SizedBox(
-                  width: 15,
-                ),
-                CircleAvatar(backgroundImage: AssetImage('assets/images/facebook_logo.png'),radius: 20,),
+                 const Text("Already have account? "),
+                GestureDetector(onTap: (){
+                  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Login()),
+            );
+                },child: Text("SignIn",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Theme.of(context).secondaryHeaderColor),),),
               ],
-            ),
-            ),
-          Padding(padding:EdgeInsets.symmetric(horizontal: 2,vertical: 15),child:Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Already have account? "),
-              GestureDetector(onTap: (){
-                Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Login()),
-          );
-              },child: Text("SignIn",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Theme.of(context).secondaryHeaderColor),),),
+            ) ,),
+              Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+              ),
             ],
-          ) ,),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-            ),
-          ],
+          ),
         ),
       ),
     );
