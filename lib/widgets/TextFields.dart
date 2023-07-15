@@ -5,10 +5,13 @@ class textFields extends StatelessWidget {
   final bool pass;
   final bool focus;
   final TextInputType keyboardtype;
-  const textFields(this.namelabel, this.pass, this.focus,this.keyboardtype, {super.key});
+  final TextEditingController control;
+  const textFields(this.namelabel, this.pass, this.focus, this.keyboardtype,this.control,
+      {super.key});
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: control,
       keyboardType: keyboardtype,
       autofocus: focus,
       obscureText: pass,

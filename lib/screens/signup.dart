@@ -4,7 +4,11 @@ import 'package:sizer/sizer.dart';
 import 'login.dart';
 
 class Signup extends StatelessWidget {
-   const Signup({super.key});
+  Signup({super.key});
+
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController confirmpassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class Signup extends StatelessWidget {
           reverse: MediaQuery.of(context).viewInsets.bottom < 1 ? true : false,
           child: Column(
             children: <Widget>[
-               SizedBox(
+              SizedBox(
                 height: 2.h,
               ),
               SizedBox(
@@ -28,8 +32,8 @@ class Signup extends StatelessWidget {
                   width: double.infinity,
                 ),
               ),
-               Padding(
-                  padding:  EdgeInsets.only(left: 1.w),
+              Padding(
+                  padding: EdgeInsets.only(left: 1.w),
                   child: const Text(
                     "Create New Account",
                     style: TextStyle(
@@ -37,33 +41,34 @@ class Signup extends StatelessWidget {
                         fontSize: 25,
                         color: Color(0xff8F74D7)),
                   )),
-               Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 2.h),
-                  child: Column(
-                    children: [
-                      const textFields("Email", false, false,TextInputType.emailAddress),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                   const textFields("Password", true, false,TextInputType.text),
-                   SizedBox(
-                        height: 2.h,
-                      ),
-                   const textFields("Confirm Password", true, false,TextInputType.text),
-                    ],
-                  ),
-                  //textFields(name,password or not , foucasable,keyboardtype)
-                   
-               ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+                child: Column(
+                  children: [
+                    textFields("Email", false, false,
+                        TextInputType.emailAddress, email),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    textFields(
+                        "Password", true, false, TextInputType.text, password),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    textFields("Confirm Password", true, false,
+                        TextInputType.text, confirmpassword),
+                  ],
+                ),
+                //textFields(name,password or not , foucasable,keyboardtype,controller)
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 1.h),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    fixedSize:const Size(300, 50) ,
+                    fixedSize: const Size(300, 50),
                     foregroundColor: Colors.white,
                     backgroundColor: Theme.of(context).secondaryHeaderColor,
                     padding: const EdgeInsets.all(10),
-                    
                   ),
                   onPressed: () {},
                   child: const Text(
@@ -71,11 +76,12 @@ class Signup extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
-              ),  
-              Padding(padding: EdgeInsets.only(top: 2.h),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 2.h),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:  [
+                  children: [
                     Expanded(
                       child: Divider(
                         indent: 20.0,
@@ -99,30 +105,53 @@ class Signup extends StatelessWidget {
                   ],
                 ),
               ),
-               Padding(padding:EdgeInsets.only(left: 2.w,top: 2.h) ,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CircleAvatar(backgroundImage: AssetImage('assets/images/google_logo.png'),radius:19,backgroundColor: Colors.transparent,),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  const CircleAvatar(backgroundImage: AssetImage('assets/images/facebook_logo.png'),radius: 20,),
-                ],
+              Padding(
+                padding: EdgeInsets.only(left: 2.w, top: 2.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircleAvatar(
+                      backgroundImage:
+                          AssetImage('assets/images/google_logo.png'),
+                      radius: 19,
+                      backgroundColor: Colors.transparent,
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    const CircleAvatar(
+                      backgroundImage:
+                          AssetImage('assets/images/facebook_logo.png'),
+                      radius: 20,
+                    ),
+                  ],
+                ),
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 2.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Already have account? "),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Login()),
+                        );
+                      },
+                      child: Text(
+                        "SignIn",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Theme.of(context).secondaryHeaderColor),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            Padding(padding:EdgeInsets.symmetric(horizontal: 1.w,vertical: 2.h),child:Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                 const Text("Already have account? "),
-                GestureDetector(onTap: (){
-                  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Login()),
-            );
-                },child: Text("SignIn",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Theme.of(context).secondaryHeaderColor),),),
-              ],
-            ) ,),
               Padding(
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
