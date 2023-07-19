@@ -19,6 +19,7 @@ class Home extends StatelessWidget {
                 children: [
                   GestureDetector(
                     child: const CircleAvatar(
+                      backgroundColor: Color.fromRGBO(240, 217, 255, 100),
                       radius: 25,
                       child: Icon(
                         Icons.menu_rounded,
@@ -29,6 +30,7 @@ class Home extends StatelessWidget {
                   Expanded(child: Container()),
                   GestureDetector(
                     child: const CircleAvatar(
+                      backgroundColor:Color.fromRGBO(240, 217, 255, 100),
                       radius: 25,
                       child: Icon(
                         Icons.notifications_sharp,
@@ -48,7 +50,7 @@ class Home extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 5),
-              child: HomeCon(), 
+              child: HomeCon(),
             ),
           ],
         ),
@@ -62,52 +64,24 @@ class HomeCon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: const TextStyle(fontSize: 10),
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: viewportConstraints.maxHeight,
-              ),
-              child: const Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  
-                  HomeList(
-                        "Erbil",
-                        "2",
-                        "1",
-                        "150",
-                        "10000",
-                        Icon(Icons.pool),
-                        "in hrere we have an house to sell",
-                        "available"),
-                    HomeList(
-                        "Erbil",
-                        "1",
-                        "1",
-                        "100",
-                        "5000",
-                        Icon(Icons.local_parking_sharp),
-                        "This is a nice house have a parking for car and it's so clean everything inside is new ",
-                        "onhold"),
-                    HomeList(
-                        "Sulaymaniah",
-                        "2",
-                        "2",
-                        "300",
-                        "100000",
-                        Icon(Icons.pool),
-                        "in hrere we have an house to sell",
-                        "sold"),
-                ],
-              ),
-            ),
-          );
-        },
+    return const SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          HomeList("Erbil", "2", "1", "150", "10000", Icon(Icons.pool),
+              "in hrere we have an house to sell", "available"),
+          HomeList(
+              "Erbil",
+              "1",
+              "1",
+              "100",
+              "5000",
+              Icon(Icons.local_parking_sharp),
+              "This is a nice house have a parking for car and it's so clean everything inside is new ",
+              "onhold"),
+          
+        ],
       ),
     );
   }

@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/screens/home.dart';
 import 'package:real_estate_app/widgets/TextFields.dart';
 import 'package:sizer/sizer.dart';
-import 'signup.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import '../model/auth.dart';
+import 'home.dart';
+import 'signup.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,35 +19,10 @@ class _LoginState extends State<Login> {
   final TextEditingController _password = TextEditingController();
   String? errormessage = '';
   bool isLogin = true;
-
   Future<void> signInWithEmailAndPassword() async {
-    try {
-      await Auth().createUserwithEmailAndPassword(
-          email: _email.text, password: _password.text);
-    } on FirebaseAuthException catch (e) {
-      setState(() {
-        errormessage = e.message;
-      });
-    }
-  }
-
-  Future<void> createUserWithEmailAndPassword() async {
-    try {
-      await Auth().createUserwithEmailAndPassword(
-          email: _email.text, password: _password.text);
-    } on FirebaseAuthException catch (e) {
-      setState(() {
-        errormessage = e.message;
-      });
-    }
-  }
-
-  Widget _errormessage() {
-    return Text(errormessage == '' ? '' : 'Hmm ? $errormessage');
-  }
-
-  Widget _submmitButton(){
-    return ElevatedButton(onPressed: isLogin ? signInWithEmailAndPassword:createUserWithEmailAndPassword, child: Text(isLogin ? "Login":"Register"));
+    await Auth().signInwithEmailAndPassword(
+        email: _email.text.toLowerCase().trim(),
+        password: _password.text.trim());
   }
 
   @override
@@ -74,7 +50,7 @@ class _LoginState extends State<Login> {
               Padding(
                   padding: EdgeInsets.only(left: 5.w),
                   child: const Text(
-                    "Login To Your Account",
+                    "Login to your account",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
@@ -112,13 +88,55 @@ class _LoginState extends State<Login> {
                     backgroundColor: Theme.of(context).secondaryHeaderColor,
                     padding: const EdgeInsets.all(10),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Home(),
-                      ),
-                    );
+                  onPressed: () async {
+                    try {
+                      await signInWithEmailAndPassword();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Home()),
+                      );
+                    } on FirebaseAuthException catch (exception) {
+                      switch (exception.code) {
+                        case "user-not-found":
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text(
+                                " User not found! ",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              backgroundColor:
+                                  Theme.of(context).secondaryHeaderColor,
+                            ),
+                          );
+                          break;
+                        case "invalid-email":
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text(
+                                "Invalid Email! ",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              backgroundColor:
+                                  Theme.of(context).secondaryHeaderColor,
+                            ),
+                          );
+                          break;
+                        case "wrong-password":
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text(
+                                " Password incorrect! ",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              backgroundColor:
+                                  Theme.of(context).secondaryHeaderColor,
+                            ),
+                          );
+                          break;
+                        default:
+                          print("Unknown error.");
+                      }
+                    }
                   },
                   child: const Text(
                     'LogIn',
