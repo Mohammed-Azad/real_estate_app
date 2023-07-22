@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:sizer/sizer.dart';
 
 class HomeList extends StatelessWidget {
   final String location;
@@ -34,7 +34,8 @@ class HomeList extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -111,7 +112,8 @@ class HomeList extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -160,7 +162,8 @@ class HomeList extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Column(

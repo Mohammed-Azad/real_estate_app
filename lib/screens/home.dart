@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/screens/addscreen.dart';
+import 'package:sizer/sizer.dart';
+
+import '../widgets/home_list.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -49,9 +52,11 @@ class Home extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: HomeCon(),
+            const Expanded(
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: HomeCon(),
+              ),
             ),
           ],
         ),
@@ -84,43 +89,40 @@ class _HomeConState extends State<HomeCon> {
   //             DocId.add(document.reference.id);
   //           }));
   // }
-  List DocId = [];
+  List<HomeList> DocId = [];
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseFirestore.instance.collection("addEstate").snapshots(),
       builder: (context, snapshot) {
-        print("its snapshotttkdfdkfjdkfdf===================$snapshot");
         if (snapshot.hasData) {
           final datas = snapshot.data?.docs.toList();
-          setState(() {
-            for (var data in datas!) {
-              DocId.add(data["location"]);
-            }
-          });
-          // final docid = HomeList(
-          //     data['location']
-          //     data['bedroom'],
-          //     data['bathroom'],
-          //     data['area'],
-          //     data['price'],
-          //     data['swimming'],
-          //     data['garage'],
-          //     data['security'],
-          //     data['description'],
-          //     data['status']);
-          // DocId.add(docid);
+
+          for (var data in datas!) {
+            final docid = HomeList(
+                data['location'],
+                data['bedroom'],
+                data['bathroom'],
+                data['area'],
+                data['price'],
+                data['swimming'],
+                data['garage'],
+                data['security'],
+                data['description'],
+                data['status']);
+            DocId.add(docid);
+          }
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           Text("Loading....");
         } else {
           print('noData in hrere');
         }
-        return ListView.builder(
-          itemCount: DocId.length,
-          itemBuilder: (context, index) {
-            return Text(DocId[index]);
-          },
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 2.w),
+          child: ListView(
+            children: DocId.toList(),
+          ),
         );
       },
     );
