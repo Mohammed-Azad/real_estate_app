@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:real_estate_app/widgets/home_list.dart';
+import 'package:real_estate_app/screens/addscreen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -30,7 +31,7 @@ class Home extends StatelessWidget {
                   Expanded(child: Container()),
                   GestureDetector(
                     child: const CircleAvatar(
-                      backgroundColor:Color.fromRGBO(240, 217, 255, 100),
+                      backgroundColor: Color.fromRGBO(240, 217, 255, 100),
                       radius: 25,
                       child: Icon(
                         Icons.notifications_sharp,
@@ -55,34 +56,73 @@ class Home extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddScreen()));
+        },
+        backgroundColor: Theme.of(context).primaryColor,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
 
-class HomeCon extends StatelessWidget {
+class HomeCon extends StatefulWidget {
   const HomeCon({super.key});
 
   @override
+  State<HomeCon> createState() => _HomeConState();
+}
+
+class _HomeConState extends State<HomeCon> {
+  // Future getDocId() async {
+  //   await FirebaseFirestore.instance
+  //       .collection("addEstate")
+  //       .get()
+  //       .then((snapshot) => snapshot.docs.forEach((document) {
+  //             DocId.add(document.reference.id);
+  //           }));
+  // }
+  List DocId = [];
+
+  @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          HomeList("Erbil", "2", "1", "150", "10000", Icon(Icons.pool),
-              "in hrere we have an house to sell", "available"),
-          HomeList(
-              "Erbil",
-              "1",
-              "1",
-              "100",
-              "5000",
-              Icon(Icons.local_parking_sharp),
-              "This is a nice house have a parking for car and it's so clean everything inside is new ",
-              "onhold"),
-          
-        ],
-      ),
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection("addEstate").snapshots(),
+      builder: (context, snapshot) {
+        print("its snapshotttkdfdkfjdkfdf===================$snapshot");
+        if (snapshot.hasData) {
+          final datas = snapshot.data?.docs.toList();
+          setState(() {
+            for (var data in datas!) {
+              DocId.add(data["location"]);
+            }
+          });
+          // final docid = HomeList(
+          //     data['location']
+          //     data['bedroom'],
+          //     data['bathroom'],
+          //     data['area'],
+          //     data['price'],
+          //     data['swimming'],
+          //     data['garage'],
+          //     data['security'],
+          //     data['description'],
+          //     data['status']);
+          // DocId.add(docid);
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          Text("Loading....");
+        } else {
+          print('noData in hrere');
+        }
+        return ListView.builder(
+          itemCount: DocId.length,
+          itemBuilder: (context, index) {
+            return Text(DocId[index]);
+          },
+        );
+      },
     );
   }
 }

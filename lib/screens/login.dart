@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:real_estate_app/widgets/TextFields.dart';
 import 'package:sizer/sizer.dart';
 
-import '../model/auth.dart';
+import '../models/auth.dart';
 import 'home.dart';
 import 'signup.dart';
 

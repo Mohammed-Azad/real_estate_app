@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/widgets/TextFields.dart';
 import 'package:sizer/sizer.dart';
+
+import '../models/auth.dart';
 import 'login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import '../model/auth.dart';
 
 class Signup extends StatefulWidget {
   Signup({super.key});
@@ -21,9 +22,9 @@ class _SignupState extends State<Signup> {
   String? errormessage = '';
   Future<void> createUserWithEmailAndPassword() async {
     try {
-        await Auth().createUserwithEmailAndPassword(
-            email: _email.text.toLowerCase().trim(), password: _password.text.trim());
-      
+      await Auth().createUserwithEmailAndPassword(
+          email: _email.text.toLowerCase().trim(),
+          password: _password.text.trim());
     } on FirebaseAuthException catch (e) {
       setState(() {
         errormessage = e.message;
@@ -96,41 +97,95 @@ class _SignupState extends State<Signup> {
                         _password.text.isEmpty &&
                         _confirmpassword.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text(" is full empty ",style: TextStyle(fontSize: 18),),backgroundColor: Theme.of(context).secondaryHeaderColor,),
+                        SnackBar(
+                          content: const Text(
+                            " is full empty ",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          backgroundColor:
+                              Theme.of(context).secondaryHeaderColor,
+                        ),
                       );
-                    }else if(_email.text.isEmpty &&_password.text.isNotEmpty&&_confirmpassword.text.isNotEmpty){
+                    } else if (_email.text.isEmpty &&
+                        _password.text.isNotEmpty &&
+                        _confirmpassword.text.isNotEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text(" email is empty ",style: TextStyle(fontSize: 18)),backgroundColor: Theme.of(context).secondaryHeaderColor,),
-                        
+                        SnackBar(
+                          content: const Text(" email is empty ",
+                              style: TextStyle(fontSize: 18)),
+                          backgroundColor:
+                              Theme.of(context).secondaryHeaderColor,
+                        ),
                       );
-                    }else if(_email.text.isNotEmpty&& _confirmpassword.text!=_password.text&&_confirmpassword.text.isNotEmpty){
+                    } else if (_email.text.isNotEmpty &&
+                        _confirmpassword.text != _password.text &&
+                        _confirmpassword.text.isNotEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text(" confirmpassword not match password ",style: TextStyle(fontSize: 18)),backgroundColor: Theme.of(context).secondaryHeaderColor),
+                        SnackBar(
+                            content: const Text(
+                                " confirmpassword not match password ",
+                                style: TextStyle(fontSize: 18)),
+                            backgroundColor:
+                                Theme.of(context).secondaryHeaderColor),
                       );
-                    }else if( _password.text.length<4 && _confirmpassword.text.length<4&&_confirmpassword.text.isNotEmpty&&_password.text.isNotEmpty){
+                    } else if (_password.text.length < 4 &&
+                        _confirmpassword.text.length < 4 &&
+                        _confirmpassword.text.isNotEmpty &&
+                        _password.text.isNotEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text(" password is to short",style: TextStyle(fontSize: 18)),backgroundColor: Theme.of(context).secondaryHeaderColor),
+                        SnackBar(
+                            content: const Text(" password is to short",
+                                style: TextStyle(fontSize: 18)),
+                            backgroundColor:
+                                Theme.of(context).secondaryHeaderColor),
                       );
-                    }else if((!_email.text.contains('@'))&&_email.text.isNotEmpty&&_password.text.isEmpty&&_confirmpassword.text.isEmpty){
+                    } else if ((!_email.text.contains('@')) &&
+                        _email.text.isNotEmpty &&
+                        _password.text.isEmpty &&
+                        _confirmpassword.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text(" email is not correct",style: TextStyle(fontSize: 18)),backgroundColor: Theme.of(context).secondaryHeaderColor),
+                        SnackBar(
+                            content: const Text(" email is not correct",
+                                style: TextStyle(fontSize: 18)),
+                            backgroundColor:
+                                Theme.of(context).secondaryHeaderColor),
                       );
-                    }else if(_email.text.isNotEmpty&&_password.text.isEmpty&&_confirmpassword.text.isEmpty){
+                    } else if (_email.text.isNotEmpty &&
+                        _password.text.isEmpty &&
+                        _confirmpassword.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text("password feild is empty",style: TextStyle(fontSize: 18)),backgroundColor: Theme.of(context).secondaryHeaderColor),
+                        SnackBar(
+                            content: const Text("password feild is empty",
+                                style: TextStyle(fontSize: 18)),
+                            backgroundColor:
+                                Theme.of(context).secondaryHeaderColor),
                       );
-                    }else if(_email.text.isNotEmpty&&_password.text.isNotEmpty&&_confirmpassword.text.isEmpty){
+                    } else if (_email.text.isNotEmpty &&
+                        _password.text.isNotEmpty &&
+                        _confirmpassword.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text(" confirm password is empty",style: TextStyle(fontSize: 18)),backgroundColor: Theme.of(context).secondaryHeaderColor),
+                        SnackBar(
+                            content: const Text(" confirm password is empty",
+                                style: TextStyle(fontSize: 18)),
+                            backgroundColor:
+                                Theme.of(context).secondaryHeaderColor),
                       );
-                    }else if(_email.text.isNotEmpty&&_password.text.isEmpty&&_confirmpassword.text.isNotEmpty){
+                    } else if (_email.text.isNotEmpty &&
+                        _password.text.isEmpty &&
+                        _confirmpassword.text.isNotEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: const Text(" password is empty",style: TextStyle(fontSize: 18)),backgroundColor: Theme.of(context).secondaryHeaderColor),
+                        SnackBar(
+                            content: const Text(" password is empty",
+                                style: TextStyle(fontSize: 18)),
+                            backgroundColor:
+                                Theme.of(context).secondaryHeaderColor),
                       );
-                    }else{
-                    createUserWithEmailAndPassword();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Login()));
+                    } else {
+                      createUserWithEmailAndPassword();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Login()));
                     }
                   },
                   child: const Text(

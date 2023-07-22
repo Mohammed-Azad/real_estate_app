@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app/screens/onboarding.dart';
-import '../model/auth.dart';
+import '../models/auth.dart';
 import '../screens/login.dart';
 
 class WidgetTree extends StatefulWidget {
