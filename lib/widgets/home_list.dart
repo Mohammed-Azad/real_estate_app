@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate_app/screens/updatescreen.dart';
 import 'package:sizer/sizer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeList extends StatelessWidget {
+  final String number;
   final String location;
   final String bedroom;
   final String bathroom;
@@ -23,6 +26,7 @@ class HomeList extends StatelessWidget {
       this.security,
       this.description,
       this.status,
+      this.number,
       {super.key});
 
   @override
@@ -34,8 +38,7 @@ class HomeList extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -47,6 +50,71 @@ class HomeList extends StatelessWidget {
                   Text(location,
                       style: const TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold)),
+                  Expanded(child: Container()),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    foregroundColor: Colors.black,
+                    elevation: 0,
+                    ),            
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>  UpdateScreen(number)));
+                    },
+                    child: const Icon(
+                      Icons.edit,
+                      color: Color(0xff8F74D7),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 3.w,
+                  ),
+                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    foregroundColor: Colors.black,
+                    elevation: 0,
+                    ),
+                    onPressed: () {
+                      
+              showDialog<String>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return Expanded(
+        child: AlertDialog(
+          title: const Text('Delete'),
+          content: const Text('Do you want to delete this item ?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () {
+          FirebaseFirestore.instance
+                                      .collection("addEstate")
+                                      .doc(number).delete().then((value) => Navigator.pop(context));
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+
+                    
+                    },
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  )
                 ],
               ),
             ),
@@ -112,8 +180,7 @@ class HomeList extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -162,8 +229,7 @@ class HomeList extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Column(
@@ -196,20 +262,20 @@ class HomeList extends StatelessWidget {
   List amenties(bool swim, bool garag, bool security) {
     List<Widget> amenite = [];
     if (swim == true) {
-      amenite.add(Icon(Icons.pool));
-      SizedBox(
+      amenite.add(const Icon(Icons.pool));
+      const SizedBox(
         width: 5,
       );
     }
     if (garage == true) {
-      amenite.add(Icon(Icons.local_parking_outlined));
-      SizedBox(
+      amenite.add(const Icon(Icons.local_parking_outlined));
+      const SizedBox(
         width: 5,
       );
     }
     if (security == true) {
-      amenite.add(Icon(Icons.local_police_outlined));
-      SizedBox(
+      amenite.add(const Icon(Icons.local_police_outlined));
+      const SizedBox(
         width: 5,
       );
     }

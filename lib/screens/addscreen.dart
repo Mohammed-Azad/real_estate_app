@@ -3,10 +3,9 @@ import 'package:real_estate_app/screens/home.dart';
 import 'package:real_estate_app/widgets/TextFields.dart';
 import 'package:sizer/sizer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class AddScreen extends StatefulWidget {
-  AddScreen({super.key});
+  const AddScreen({super.key});
 
   @override
   State<AddScreen> createState() => _AddScreenState();
@@ -52,10 +51,10 @@ class _AddScreenState extends State<AddScreen> {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(vertical: 3.h),
-              child: Container(
-                child: Image.asset("assets/images/addhome.png"),
+              child: SizedBox(
                 width: 100.w,
                 height: 20.h,
+                child: Image.asset("assets/images/addhome.png"),
               ),
             ),
             Padding(
@@ -111,7 +110,7 @@ class _AddScreenState extends State<AddScreen> {
                     "Amenities",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  Container(
+                  SizedBox(
                     width: 100.w,
                     height: 20.h,
                     child: Wrap(
@@ -183,6 +182,7 @@ class _AddScreenState extends State<AddScreen> {
                               .instance
                               .collection("addEstate");
                           collref.add({
+                            'number':_homenumber.text,
                             'area': _homearea.text,
                             'bathroom': _bathroom.text,
                             'bedroom': _bedroom.text,
@@ -194,18 +194,26 @@ class _AddScreenState extends State<AddScreen> {
                             'status': "available",
                             'swimming': swimming,
                           });
+                          _homearea.clear();
+                          _homedescription.clear();
+                          _homelocation.clear();
+                          _homenumber.clear();
+                          _homeprice.clear();
+                          _bedroom.clear();
+                          _bathroom.clear();
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder:(context)=>const Home()),
+                            MaterialPageRoute(
+                                builder: (context) => const Home()),
                           );
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: const Text(" password is empty",
-                                style: TextStyle(fontSize: 18)),
-                            backgroundColor:
-                                Theme.of(context).secondaryHeaderColor),
-                      );
+                            SnackBar(
+                                content: const Text(" password is empty",
+                                    style: TextStyle(fontSize: 18)),
+                                backgroundColor:
+                                    Theme.of(context).secondaryHeaderColor),
+                          );
                         }
                       },
                       child: const Text(

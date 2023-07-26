@@ -89,8 +89,8 @@ class _HomeConState extends State<HomeCon> {
   //             DocId.add(document.reference.id);
   //           }));
   // }
-  List<HomeList> DocId = [];
 
+  List<HomeList> DocId = [];
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -98,7 +98,6 @@ class _HomeConState extends State<HomeCon> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final datas = snapshot.data?.docs.toList();
-
           for (var data in datas!) {
             final docid = HomeList(
                 data['location'],
@@ -110,11 +109,26 @@ class _HomeConState extends State<HomeCon> {
                 data['garage'],
                 data['security'],
                 data['description'],
-                data['status']);
+                data['status'],
+                data.id);
+                
             DocId.add(docid);
           }
         } else if (snapshot.connectionState == ConnectionState.waiting) {
-          Text("Loading....");
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  backgroundColor: Colors.grey[300],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                const Text("Loading"),
+              ],
+            ),
+          );
         } else {
           print('noData in hrere');
         }
